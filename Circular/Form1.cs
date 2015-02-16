@@ -338,7 +338,7 @@ namespace Circular
                 {
 
                     Rectangle r = root.GetSize();
-                    Bitmap b = new Bitmap(r.Width, r.Height);
+                    Bitmap b = new Bitmap((int)(r.Width * 1.2),(int)( r.Height * 1.2));
                     Graphics g = Graphics.FromImage(b);
                     root.Draw(g, false);
 
@@ -358,7 +358,7 @@ namespace Circular
                 else
                 {
                     Rectangle r = root.GetSize();
-                    Bitmap b = new Bitmap(r.Width, r.Height);
+                    Bitmap b = new Bitmap((int)(r.Width * 1.2), (int)(r.Height * 1.2));
                     Graphics g = Graphics.FromImage(b);
                     root.Draw(g, false);
 
@@ -408,7 +408,9 @@ namespace Circular
         {
             if (SelectedCircle != null && (SelectedCircle.GetType() == typeof(Sentence.Sentence) || SelectedCircle.GetType() == typeof(Paragraph.Paragraph)))
             {
-                SelectedCircle.AlignPacMouths();
+               // SelectedCircle.AlignPacMouths();
+                if (SelectedCircle.CircleParent!=null)
+                SelectedCircle.CircleParent.AlignPacMouths();
                 Sentence_RedrawRequest();
             }
 

@@ -30,7 +30,7 @@ namespace Circular.Sentence
 
         public void ArrangeSentence()
         {
-
+            DrawBorder = false;
             switch (_SentenceArrangement)
             {
                 case PredefinedArrangment.CenterLine:
@@ -54,14 +54,17 @@ namespace Circular.Sentence
 
                 case PredefinedArrangment.Circle:
                     ArrangeInCircle();
+                    DrawBorder = true;
                     break;
 
                 case PredefinedArrangment.Tight:
                     ArrangeInTight();
+                    DrawBorder = true;
                     break;
 
                 case PredefinedArrangment.TightCircle:
                     ArrangeInTightCircle();
+                    DrawBorder = true;
                     break;
 
             }

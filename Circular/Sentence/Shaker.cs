@@ -283,14 +283,18 @@ namespace Circular.Sentence
                     else
                         dots[DotI1].center.X += (dots[DotI1].acceleration.X * dt2/10 + jump2 * rnd.NextDouble());
 
-                  
 
-                    if (Math.Abs(dots[DotI1].acceleration.X * dt) < 10)
+
+                    if (Math.Abs(dots[DotI1].acceleration.Y * dt) < 10)
                         dots[DotI1].center.Y += (dots[DotI1].acceleration.Y * dt2 + jump2 * rnd.NextDouble());
                     else
-                        dots[DotI1].center.Y += (dots[DotI1].acceleration.Y * dt2/10 + jump2 * rnd.NextDouble());
+                        dots[DotI1].center.Y += (dots[DotI1].acceleration.Y * dt2 / 10 + jump2 * rnd.NextDouble());
 
-                  
+
+
+                    if (Math.Abs(dots[DotI1].center.X) > 1000 || Math.Abs(dots[DotI1].center.Y) > 1000)
+                        dots[DotI1].center = new PointD(5, 5);
+
                 }
                 dots[DotI1].acceleration = new PointD(0, 0);
             }
@@ -347,7 +351,7 @@ namespace Circular.Sentence
                         //f = f - Math.Exp(-.4 );
                         if (f > 0)
                         {
-                            f = f * 5;
+                            f = f * 25;
                             //if (iter > .4 * iterations)
                             //    f = f * 16;
                         }
@@ -383,7 +387,6 @@ namespace Circular.Sentence
 
         }
 
-
         public void SetConnections(List<Dot> dots, List<Connection> connections, double[,] radii, double kWhole, int iter, int iterations)
         {
             //pull in the items
@@ -418,7 +421,6 @@ namespace Circular.Sentence
 
 
         }
-
 
         public void SetRingAttraction(List<Dot> dots, double radius)
         {

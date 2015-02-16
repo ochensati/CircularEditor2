@@ -218,7 +218,7 @@
             this.tblText.Name = "tblText";
             this.tblText.Size = new System.Drawing.Size(1089, 72);
             this.tblText.TabIndex = 12;
-            this.tblText.Text = resources.GetString("tblText.Text");
+            this.tblText.Text = "ABCD EFGH IJKL MN_O_P QRS_T UVWX YZ SH TH QU ER TION SION";
             // 
             // label1
             // 

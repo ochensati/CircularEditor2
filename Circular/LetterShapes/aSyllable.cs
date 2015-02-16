@@ -190,6 +190,7 @@ namespace Circular.LetterShapes
             {
                 Mothers = new aSyllable[] 
                 {
+                      new Spiral(),
                     new VowelOnly(),
                     new Blank(),
                     new Arc(),
@@ -198,7 +199,6 @@ namespace Circular.LetterShapes
                     new MoonRise(),
                     new Sunrise(),
                     new SliverMoon(),
-                    new Spiral(),
                     new Connector()
                 };
             }

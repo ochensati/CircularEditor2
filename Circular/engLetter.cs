@@ -113,28 +113,38 @@ namespace Circular
                 Vowel = "";
             }
 
-            if ("aeiou".Contains(syllable[0]))
+            if ("aeiou".Contains(syllable[0]) && syllable.Length == 1)
             {
                 isVowel = true;
                 Vowel = syllable;
             }
             else
             {
-                Consonant = "";
-                Vowel = "";
-                foreach (var s in syllable.ToCharArray())
-                {
-                    if ("aeiou".Contains(s))
-                    {
-                        Vowel += s;
-                    }
-                    else
-                        Consonant += s;
-                }
 
-                if (Consonant == "'")
+                if ("aeiou".Contains(syllable[0]) && "aeiou".Contains(syllable[1]))
                 {
-                    isPunct = true;
+                    isVowel = true;
+                    Vowel = syllable[0].ToString();
+                }
+                else
+                {
+
+                    Consonant = "";
+                    Vowel = "";
+                    foreach (var s in syllable.ToCharArray())
+                    {
+                        if ("aeiou".Contains(s))
+                        {
+                            Vowel += s;
+                        }
+                        else
+                            Consonant += s;
+                    }
+
+                    if (Consonant == "'")
+                    {
+                        isPunct = true;
+                    }
                 }
             }
         }

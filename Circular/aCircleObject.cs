@@ -19,6 +19,7 @@ namespace Circular
     [Serializable]
     public abstract class aCircleObject : iAnchorHolder, iMouseable
     {
+        protected PredefinedArrangment _SentenceArrangement;
 
         public event RedrawRequestEvent RedrawRequest;
 
@@ -80,7 +81,7 @@ namespace Circular
                 if (_scriptStyle != value)
                 {
                     _scriptStyle = value;
-                   
+
                     CalculateCircle(true);
                     CallRedraw();
                 }
@@ -461,14 +462,15 @@ namespace Circular
         public virtual void DrawCircleBorder(Graphics canvas, bool mockup)
         {
 
-            var TBackup = canvas.Transform;
-
-            canvas.TranslateTransform(_DrawCenter.X, _DrawCenter.Y);
-            canvas.RotateTransform((float)_CircleAngle);
-            canvas.ScaleTransform((float)_Scale, (float)_Scale);
-
             if (DrawBorder)
             {
+                var TBackup = canvas.Transform;
+
+                canvas.TranslateTransform(_DrawCenter.X, _DrawCenter.Y);
+                canvas.RotateTransform((float)_CircleAngle);
+                canvas.ScaleTransform((float)_Scale, (float)_Scale);
+
+
                 if (Syllables != null && Syllables.Count > 0)
                 {
                     GraphicsPath border = new GraphicsPath();
@@ -497,9 +499,10 @@ namespace Circular
                 }
                 else
                     canvas.DrawEllipse(Pens.Black, CircleBounds);
-            }
 
-            canvas.Transform = TBackup;
+
+                canvas.Transform = TBackup;
+            }
         }
 
 
@@ -575,7 +578,7 @@ namespace Circular
         }
 
         protected List<Shaker.Dot> BorderSyllables;
-        public virtual void CalculateBorderWords(string text, int rearrange=0)
+        public virtual void CalculateBorderWords(string text, int rearrange = 0)
         {
             string[] words = text.Split(new string[] { ",", " ", ".", ":", ";", "!", "?", "(", ")", "\"", "-" }, StringSplitOptions.RemoveEmptyEntries);
             int letterwidth = 80;
@@ -593,7 +596,7 @@ namespace Circular
 
 
 
-            double circum =Math.Abs( this.CircleRadius * 2 * Math.PI);
+            double circum = Math.Abs(this.CircleRadius * 2 * Math.PI);
 
             double[] letterArc;
             letterArc = new double[eWords.Count];
@@ -696,11 +699,11 @@ namespace Circular
             foreach (var s in Syllables)
             {
                 Rectangle t = s.LetterBounds;
-                t.Inflate((int)(t.Width*.5),(int)( t.Height*.5));
+                t.Inflate((int)(t.Width * .5), (int)(t.Height * .5));
                 BorderSyllables.Add(new Shaker.Dot(t, true));
             }
 
-            if (rearrange>0)
+            if (rearrange > 0)
             {
                 ArrangeInTightCircle();
 
@@ -708,7 +711,7 @@ namespace Circular
 
                 this._DrawCenter = new Point(-1 * b.X + 40, -1 * b.Y + 40);
 
-                CalculateBorderWords(text, rearrange-1);
+                CalculateBorderWords(text, rearrange - 1);
             }
             DoRedraw();
         }
@@ -763,7 +766,7 @@ namespace Circular
                     if (v[0].JoinableArc != null)
                         v[0].JoinableArc.UseWordForArc(n);
                 }
-              //  w.CircleAngle = 0;
+                //  w.CircleAngle = 0;
             }
 
             if (SubCircles.Count > 1)
@@ -779,13 +782,14 @@ namespace Circular
                 {
                     w.CircleAngle = (angle - v[0].Angle) + 180;
                 }
-               
+
             }
-           
+
         }
 
         public void ArrangeInSpots()
         {
+            CircleRadius = -1;
             int x = 0;
             int y = 0;
             int r;
@@ -1206,7 +1210,7 @@ namespace Circular
             CallRedraw();
         }
 
-        public void ArrangeInTightCircle(double tightness=1)
+        public void ArrangeInTightCircle(double tightness = 1)
         {
             _doRedraw = false;
             //ArrangeInSpots();
@@ -1251,7 +1255,7 @@ namespace Circular
 
                 tightness *= 4;
             }
-          
+
 
             double area = 0;
 
@@ -1282,7 +1286,7 @@ namespace Circular
             {
                 for (int iter = 0; iter < 5000; iter++)
                 {
-                    ai.Jiggle(dots, connections, sentenceRadius, .2*tightness, 1, 0, 45 + i, iter, 5000);
+                    ai.Jiggle(dots, connections, sentenceRadius, .2 * tightness, 1, 0, 45 + i, iter, 5000);
 
                     if (Preview != null && (iter % 10) == 0)
                     {

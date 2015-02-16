@@ -14,7 +14,7 @@ namespace Circular.Paragraph
     {
 
 
-        PredefinedArrangment _SentenceArrangement;
+       
 
         public PredefinedArrangment SentenceArrangement
         {
@@ -25,6 +25,11 @@ namespace Circular.Paragraph
             set
             {
                 _SentenceArrangement = value;
+
+                if (_SentenceArrangement == PredefinedArrangment.Circle || _SentenceArrangement == PredefinedArrangment.Tight || _SentenceArrangement == PredefinedArrangment.TightCircle)
+                    DrawBorder = true;
+                else
+                    DrawBorder = false;
 
                 if (SubCircles != null)
                 {
@@ -110,9 +115,13 @@ namespace Circular.Paragraph
                 }
             }
 
+            if (_SentenceArrangement == PredefinedArrangment.TightCircle)
+                ArrangeInTightCircle(30);
+            else
+            {
+                SentenceArrangement = _SentenceArrangement;
 
-
-            ArrangeInTightCircle(30);
+            }
 
             for (int i = 0; i < SubCircles.Count; i++)
             {
