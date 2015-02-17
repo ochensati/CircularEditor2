@@ -803,7 +803,7 @@ namespace Circular
                     h = r;
             }
 
-            y = h * 3;
+            y = (int)(h * 1.5);
 
             foreach (var w in SubCircles)
             {
@@ -823,12 +823,12 @@ namespace Circular
 
             Rectangle bounds = this.GetSize();
 
-            x = bounds.X + bounds.Width / 2;
-            y = bounds.Y + bounds.Height / 2;
-            foreach (var w in SubCircles)
-            {
-                w._DrawCenter = new Point(w._DrawCenter.X - x, w._DrawCenter.Y - y);
-            }
+            //x = bounds.X + bounds.Width / 2;
+            //y = bounds.Y + bounds.Height / 2;
+            //foreach (var w in SubCircles)
+            //{
+            //    w._DrawCenter = new Point(w._DrawCenter.X - x, w._DrawCenter.Y - y);
+            //}
 
             bounds = this.GetSize();
 

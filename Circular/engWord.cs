@@ -22,7 +22,7 @@ namespace Circular
 
             if (scriptStyle == Circular.aCircleObject.ScriptStyles.Ashcroft || scriptStyle == Circular.aCircleObject.ScriptStyles.Small)
             {
-                word = word.Replace("st", "_st_");
+                word = word.Replace("st", "_.st_");
 
                 List<string> combo = new List<string>();
                 if (scriptStyle != Circular.aCircleObject.ScriptStyles.Small)
