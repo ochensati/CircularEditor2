@@ -141,7 +141,7 @@ namespace Circular
                             Consonant += s;
                     }
 
-                    if (Consonant == "'")
+                    if (Consonant == "'" || Consonant == "’")
                     {
                         isPunct = true;
                     }

@@ -21,11 +21,11 @@ namespace Circular.Words
         [CategoryAttribute("Read-Only")]
         public engWord Word { get; private set; }
 
-       
+
 
 
         protected Point[] _startCross;
-      
+
 
         protected override void ChangeFancy()
         {
@@ -116,7 +116,7 @@ namespace Circular.Words
                 p.DrawDot(ref canvas, Color.White, Color.Black, false);
             }
 
-           
+
         }
 
         protected override void CalculateCircle(bool fixConnections = true)
@@ -484,16 +484,16 @@ namespace Circular.Words
         public override iMouseable HitTest(Point p)
         {
             double r = MathHelps.distance(this._DrawCenter, p) / Scale;
+
             if (r < this.Radius)
             {
-               
                 //transform coordinates
                 Point p2 = new Point((int)((p.X - _DrawCenter.X) / Scale), (int)((p.Y - _DrawCenter.Y) / Scale));
 
                 if (SubWord != null)
                 {
                     var sub = SubWord.HitTest(p2);
-                   
+
                     if (sub != null)
                         return sub;
                 }
@@ -508,11 +508,12 @@ namespace Circular.Words
                     if (o != null)
                         return o;
                 }
+
                 return this;
             }
             else
             {
-                
+
                 return null;
             }
         }

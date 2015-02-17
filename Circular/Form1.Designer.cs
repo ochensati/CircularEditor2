@@ -218,7 +218,8 @@
             this.tblText.Name = "tblText";
             this.tblText.Size = new System.Drawing.Size(1089, 72);
             this.tblText.TabIndex = 12;
-            this.tblText.Text = "ABCD EFGH IJKL MN_O_P QRS_T UVWX YZ SH TH QU ER TION SION";
+            this.tblText.Text = "There’s a horror movie called Alien? That’s really offensive. No wonder everyone " +
+    "keeps invading you.";
             // 
             // label1
             // 

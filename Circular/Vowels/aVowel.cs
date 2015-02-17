@@ -106,10 +106,10 @@ namespace Circular.Vowels
         }
         public void MoveDelta(Point originalPoint, int deltaX, int deltaY)
         {
-            double r = Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
-            double theta = MathHelps.Atan2(deltaY, deltaX) -_Word. TotalAngle;
-            DrawCenter = MathHelps.D2Coords(originalPoint, r, theta);
-            Redraw();
+            //double r = Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+            //double theta = MathHelps.Atan2(deltaY, deltaX) -_Word. TotalAngle;
+            //DrawCenter = MathHelps.D2Coords(originalPoint, r, theta);
+            //Redraw();
         }
 
         [CategoryAttribute("Read-Only")]

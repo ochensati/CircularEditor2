@@ -282,6 +282,8 @@ namespace Circular
             }
             set
             {
+                if (double.IsNaN(value))
+                    System.Diagnostics.Debug.Print("");
                 _CircleAngle = value;
 
                 Redraw();
@@ -757,6 +759,8 @@ namespace Circular
 
                 var angle = MathHelps.Atan2(w._DrawCenter, n._DrawCenter);
 
+                if (double.IsNaN(angle))
+                    angle = 0;
                 var v = w.PreferedAngles();
 
                 if (v.Count > 0)
@@ -1236,12 +1240,12 @@ namespace Circular
                     connections.Add(new Shaker.Connection((dots[d1].radius + dots[d2].radius) * .9, d1, d2));
             }
 
-            if (connections.Count > 1)
-            {
-                d1 = dots.Count - 1;
-                d2 = 0;
-                connections.Add(new Shaker.Connection((dots[d1].radius + dots[d2].radius) * 1.1, d1, d2));
-            }
+            //if (connections.Count > 1)
+            //{
+            //    d1 = dots.Count - 1;
+            //    d2 = 0;
+            //    connections.Add(new Shaker.Connection((dots[d1].radius + dots[d2].radius) * 1.1, d1, d2));
+            //}
 
 
 
@@ -1265,12 +1269,12 @@ namespace Circular
             }
 
 
-            double sentenceRadius = Math.Sqrt(area * 1.5 / Math.PI) * 1;
+            double sentenceRadius = Math.Sqrt(area * 1.5 / Math.PI) * 1.3;
 
             if (BorderSyllables != null && BorderSyllables.Count > 0)
                 sentenceRadius *= 1.2;
 
-            if (CircleParent != null)
+            if (CircleParent != null )
             {
                 Shaker.Dot[] ExtraDots = new Shaker.Dot[] { new Shaker.Dot(sentenceRadius, new Point((int)(sentenceRadius * 1.85), 0), 0, true) };
 
@@ -1280,13 +1284,14 @@ namespace Circular
                 }
             }
 
+            int maxIterations = dots.Count *100;
             double[] scores = new double[1];
             PointD[][] centers = new PointD[scores.Length][];
             for (int i = 0; i < scores.Length; i++)
             {
-                for (int iter = 0; iter < 5000; iter++)
+                for (int iter = 0; iter < maxIterations; iter++)
                 {
-                    ai.Jiggle(dots, connections, sentenceRadius, .2 * tightness, 1, 0, 45 + i, iter, 5000);
+                    ai.Jiggle(dots, connections, sentenceRadius, .2 * tightness, 1, 0, 45 + i, iter, maxIterations);
 
                     if (Preview != null && (iter % 10) == 0)
                     {

@@ -59,7 +59,7 @@ namespace Circular
             SelectedCircle.RedrawRequest += new RedrawRequestEvent(Sentence_RedrawRequest);
             ((Paragraph.Paragraph)SelectedCircle).Initialize(null, scriptStyle, 1, 20, false, null);
             ((Paragraph.Paragraph)SelectedCircle).InitializeParagraph(text);
-        
+
 
             Rectangle r = SelectedCircle.GetSize();
             noDrawing = false;
@@ -161,6 +161,7 @@ namespace Circular
                 {
                     radomizeLinesMI.Visible = true;
                     saveWordMI.Visible = true;
+                    alignArcToolStripMenuItem.Visible = true;
                 }
 
                 if (hit.GetType() == typeof(Paragraph.Paragraph))
@@ -227,14 +228,7 @@ namespace Circular
 
         private void saveToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Rectangle r = root.GetSize();
-            Bitmap b = new Bitmap(r.Width, r.Height);
-            Graphics g = Graphics.FromImage(b);
-            root.Draw(g, false);
-
-            g.Flush();
-
-            g = null;
+           
             //.Save("c:\\temp\\b3.bmp");
 
             saveFileDialog1.Filter = "Circular (.cir)|*.cir|Vector Image (.emf)|*.emf|Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|Png Image (.png)|*.png|Tiff Image (.tiff)|*.tiff";
@@ -243,6 +237,14 @@ namespace Circular
             {
                 if (Path.GetExtension(saveFileDialog1.FileName).ToLower() == ".emf")
                 {
+                    Rectangle r = root.GetSize();
+                    Bitmap b = new Bitmap(r.Width, r.Height);
+                    Graphics g = Graphics.FromImage(b);
+                    root.Draw(g, false);
+
+                    g.Flush();
+
+                    g = null;
                     var ms = GraphicsHelps.MakeMetafileStream((Bitmap)b);
 
                     using (FileStream file = new FileStream(saveFileDialog1.FileName, FileMode.Create, System.IO.FileAccess.Write))
@@ -265,13 +267,21 @@ namespace Circular
                         formatter.Serialize(stream, root);
                         stream.Close();
 
-
                         root.RedrawRequest += new RedrawRequestEvent(Sentence_RedrawRequest);
-
-
                     }
                     else
-                        ((Bitmap)pbCanvas.Image).Save(saveFileDialog1.FileName);
+                    {
+                        Rectangle r = root.GetSize();
+                        Bitmap b = new Bitmap((int)(r.Width * 1.2), (int)(r.Height * 1.2));
+                        Graphics g = Graphics.FromImage(b);
+                        root.Draw(g, false);
+
+                        g.Flush();
+
+                        g = null;
+
+                        (b).Save(saveFileDialog1.FileName);
+                    }
 
                 }
 
@@ -338,7 +348,7 @@ namespace Circular
                 {
 
                     Rectangle r = root.GetSize();
-                    Bitmap b = new Bitmap((int)(r.Width * 1.2),(int)( r.Height * 1.2));
+                    Bitmap b = new Bitmap((int)(r.Width * 1.2), (int)(r.Height * 1.2));
                     Graphics g = Graphics.FromImage(b);
                     root.Draw(g, false);
 
@@ -408,9 +418,9 @@ namespace Circular
         {
             if (SelectedCircle != null && (SelectedCircle.GetType() == typeof(Sentence.Sentence) || SelectedCircle.GetType() == typeof(Paragraph.Paragraph)))
             {
-               // SelectedCircle.AlignPacMouths();
-                if (SelectedCircle.CircleParent!=null)
-                SelectedCircle.CircleParent.AlignPacMouths();
+                SelectedCircle.AlignPacMouths();
+                if (SelectedCircle.CircleParent != null)
+                    SelectedCircle.CircleParent.AlignPacMouths();
                 Sentence_RedrawRequest();
             }
 

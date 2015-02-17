@@ -14,7 +14,7 @@ namespace Circular.Paragraph
     {
 
 
-       
+
 
         public PredefinedArrangment SentenceArrangement
         {
@@ -63,16 +63,16 @@ namespace Circular.Paragraph
 
             string temp = OrignalText.Trim();
 
-            string borderWords=null;
+            string borderWords = null;
             int idx = temp.IndexOf("{");
             if (idx > -1)
             {
                 int idx2 = temp.IndexOf("}", idx);
-                borderWords = temp.Substring(idx+1, idx2 - idx-1).Trim();
-                temp = temp.Remove(idx, idx2 - idx+1).Trim();
+                borderWords = temp.Substring(idx + 1, idx2 - idx - 1).Trim();
+                temp = temp.Remove(idx, idx2 - idx + 1).Trim();
             }
 
-           
+
             string[] splits = new string[] { ".", ":", ";", "!", "?", "(", ")", "\"", "-", "\n" };
 
 
@@ -115,14 +115,18 @@ namespace Circular.Paragraph
                 }
             }
 
-            if (_SentenceArrangement == PredefinedArrangment.TightCircle)
-                ArrangeInTightCircle(30);
-            else
+            if (SubCircles.Count > 1)
             {
-                SentenceArrangement = _SentenceArrangement;
-
+                if (_SentenceArrangement == PredefinedArrangment.TightCircle)
+                    ArrangeInTightCircle(30);
+                else
+                {
+                    SentenceArrangement = _SentenceArrangement;
+                }
             }
 
+
+            //hook in all the pac mouths, niot sure why i did it this way.
             for (int i = 0; i < SubCircles.Count; i++)
             {
                 List<Sentence.Shaker.Dot> Dots = new List<Sentence.Shaker.Dot>();
@@ -171,23 +175,24 @@ namespace Circular.Paragraph
         public override iMouseable HitTest(Point p)
         {
             double r = MathHelps.distance(this._DrawCenter, p) / Scale;
+
+            //transform coordinates
+            Point p2 = new Point((int)((p.X - _DrawCenter.X) / Scale), (int)((p.Y - _DrawCenter.Y) / Scale));
+
+
+            double r2 = MathHelps.distance(new Point((int)0, (int)0), p2);
+            double angle = MathHelps.Atan2(p2.Y, p2.X);
+            angle -= CircleAngle;
+            Point p3 = MathHelps.D2Coords(new Point((int)0, (int)0), r2, angle);
+            foreach (var s in SubCircles)
+            {
+                var o = s.HitTest(p3);
+                if (o != null)
+                    return o;
+            }
+
             if (r < this.Radius)
             {
-
-                //transform coordinates
-                Point p2 = new Point((int)((p.X - _DrawCenter.X) / Scale), (int)((p.Y - _DrawCenter.Y) / Scale));
-
-
-                double r2 = MathHelps.distance(new Point((int)0, (int)0), p2);
-                double angle = MathHelps.Atan2(p2.Y, p2.X);
-                angle -= CircleAngle;
-                Point p3 = MathHelps.D2Coords(new Point((int)0, (int)0), r2, angle);
-                foreach (var s in SubCircles)
-                {
-                    var o = s.HitTest(p3);
-                    if (o != null)
-                        return o;
-                }
                 return this;
             }
             else
@@ -221,8 +226,12 @@ namespace Circular.Paragraph
                 w.Draw(canvas, false);
             }
 
-            var w2 = SubCircles[0];
-            canvas.DrawArc(new Pen(Color.Black, 5), MathHelps.Circle2Rect(w2.DrawCenter, w2.OuterBounds.Width / 2 + 2), (float)w2.CircleAngle + 90, 180);
+
+            if (SubCircles.Count > 1)
+            {
+                var w2 = SubCircles[0];
+                canvas.DrawArc(new Pen(Color.Black, 5), MathHelps.Circle2Rect(w2.DrawCenter, w2.OuterBounds.Width / 2 + 2), (float)w2.CircleAngle + 90, 180);
+            }
         }
     }
 }

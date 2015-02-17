@@ -44,7 +44,14 @@ namespace Circular.LetterShapes.Shapes
 
                     GraphicsPath Sun = new GraphicsPath();
                     Sun.StartFigure();
-                    Sun.AddArc(_WordParent.CircleBounds, (float)_mainAngles[1], -1 * (float)Math.Abs(_mainAngles[1] - _mainAngles[0]));
+                    float sub1 =(float) Math.Abs(_mainAngles[1] - _mainAngles[0]);
+                    if (sub1 > 180 || SubArc>180)
+                    {
+                        System.Diagnostics.Debug.Print("");
+
+                    }
+
+                    Sun.AddArc(_WordParent.CircleBounds, (float)_mainAngles[1], -1 *sub1);
                     Sun.AddArc(LetterBounds, (float)_subAngles[0], (float)(SubArc));
                     Sun.CloseFigure();
 

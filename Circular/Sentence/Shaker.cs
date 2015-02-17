@@ -266,8 +266,8 @@ namespace Circular.Sentence
 
         private void DoMove(List<Dot> dots, double radius, double dt, int jump, int iter, int iterations)
         {
-            double jump2 =  (1 - Math.Pow(iter / iterations, 3)) * jump;
-            double dt2 = Math.Pow(1 - .3 * iter / iterations, 2) * dt;
+            double jump2 =  Math.Pow( (1 -iter / iterations), 7) * jump;
+            double dt2 = Math.Pow(1 - .3 * iter / iterations, 1) * dt;
 
          //   double outRadius = (1 + (1 - iter / iterations))* radius;
 
@@ -428,19 +428,19 @@ namespace Circular.Sentence
             {
                 double dist = distance(dots[DotI1].center, new PointD(0, 0)) ;
 
-                //if (dist + dots[DotI1].radius > radius)
-                //{
-                //    double f = Math.Pow( Math.Abs((dist -radius )/ radius) ,3);
-
-                //    PointD force =  UnitVector(-2 * f*0, dots[DotI1].center, new PointD(0, 0));
-
-                //    dots[DotI1].acceleration.X += force.X;
-                //    dots[DotI1].acceleration.Y += force.Y;
-
-                //}
-                //else
+                if (dist + dots[DotI1].radius < radius)
                 {
-                    double f =  -.001* dist;
+                    double f = -.0005 * dist;
+
+                    PointD force = UnitVector(f, dots[DotI1].center, new PointD(0, 0));
+
+                    dots[DotI1].acceleration.X += force.X;
+                    dots[DotI1].acceleration.Y += force.Y;
+
+                }
+                else
+                {
+                    double f =  -.5* dist;
 
                     PointD force =  UnitVector( f, dots[DotI1].center, new PointD(0, 0));
 

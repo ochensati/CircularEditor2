@@ -30,6 +30,12 @@ namespace Circular.Sentence
 
         public void ArrangeSentence()
         {
+            if (SubCircles.Count < 2)
+            {
+                ArrangeInSpots();
+                return;
+            }
+
             DrawBorder = false;
             switch (_SentenceArrangement)
             {
@@ -84,7 +90,7 @@ namespace Circular.Sentence
 
             string temp = OrignalSentence.Trim();
 
-           
+
             int idx = temp.IndexOf("[");
             if (idx > -1)
             {
@@ -366,11 +372,14 @@ namespace Circular.Sentence
                 canvas.FillEllipse(Brushes.White, MathHelps.Circle2Rect(w.DrawCenter, w.OuterBounds.Width / 2));
             }
 
-            var w2 = SubCircles[0];
-            canvas.DrawArc(new Pen(Color.Black, 5), MathHelps.Circle2Rect(w2.DrawCenter, w2.OuterBounds.Width / 2 + 2), (float)w2.CircleAngle, 180);
-            w2 = SubCircles[SubCircles.Count - 1];
-            canvas.DrawArc(new Pen(Color.Black, 5), MathHelps.Circle2Rect(w2.DrawCenter, w2.OuterBounds.Width / 2 + 2), (float)w2.CircleAngle + 180, 180);
 
+            if (SubCircles.Count > 1)
+            {
+                var w2 = SubCircles[0];
+                canvas.DrawArc(new Pen(Color.Black, 5), MathHelps.Circle2Rect(w2.DrawCenter, w2.OuterBounds.Width / 2 + 2), (float)w2.CircleAngle, 180);
+                w2 = SubCircles[SubCircles.Count - 1];
+                canvas.DrawArc(new Pen(Color.Black, 5), MathHelps.Circle2Rect(w2.DrawCenter, w2.OuterBounds.Width / 2 + 2), (float)w2.CircleAngle + 180, 180);
+            }
 
             foreach (var w in SubCircles)
             {
@@ -382,23 +391,24 @@ namespace Circular.Sentence
         public override iMouseable HitTest(Point p)
         {
             double r = MathHelps.distance(this._DrawCenter, p) / Scale;
+
+
+            //transform coordinates
+            Point p2 = new Point((int)((p.X - _DrawCenter.X) / Scale), (int)((p.Y - _DrawCenter.Y) / Scale));
+
+
+            double r2 = MathHelps.distance(new Point((int)0, (int)0), p2);
+            double angle = MathHelps.Atan2(p2.Y, p2.X);
+            angle -= CircleAngle;
+            Point p3 = MathHelps.D2Coords(new Point((int)0, (int)0), r2, angle);
+            foreach (var s in SubCircles)
+            {
+                var o = s.HitTest(p3);
+                if (o != null)
+                    return o;
+            }
             if (r < this.Radius)
             {
-
-                //transform coordinates
-                Point p2 = new Point((int)((p.X - _DrawCenter.X) / Scale), (int)((p.Y - _DrawCenter.Y) / Scale));
-
-
-                double r2 = MathHelps.distance(new Point((int)0, (int)0), p2);
-                double angle = MathHelps.Atan2(p2.Y, p2.X);
-                angle -= CircleAngle;
-                Point p3 = MathHelps.D2Coords(new Point((int)0, (int)0), r2, angle);
-                foreach (var s in SubCircles)
-                {
-                    var o = s.HitTest(p3);
-                    if (o != null)
-                        return o;
-                }
                 return this;
             }
             else
