@@ -45,10 +45,9 @@ namespace Circular.LetterShapes.Shapes
                     GraphicsPath Sun = new GraphicsPath();
                     Sun.StartFigure();
                     float sub1 =(float) Math.Abs(_mainAngles[1] - _mainAngles[0]);
-                    if (sub1 > 180 || SubArc>180)
+                    if (sub1 > 180 || SubArc> 180)
                     {
                         System.Diagnostics.Debug.Print("");
-
                     }
 
                     Sun.AddArc(_WordParent.CircleBounds, (float)_mainAngles[1], -1 *sub1);

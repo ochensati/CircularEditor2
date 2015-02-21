@@ -124,6 +124,12 @@ namespace Circular.Paragraph
                     SentenceArrangement = _SentenceArrangement;
                 }
             }
+            else
+            {
+
+                SubCircles[0].CalculateBorderWords(borderWords, 1);
+                borderWords = null;
+            }
 
 
             //hook in all the pac mouths, niot sure why i did it this way.
@@ -152,7 +158,7 @@ namespace Circular.Paragraph
 
             this._DrawCenter = new Point(-1 * b.X + 40, -1 * b.Y + 40);
 
-            if (borderWords != null)
+            if (borderWords != null )
                 CalculateBorderWords(borderWords, 3);
 
         }

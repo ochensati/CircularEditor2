@@ -281,6 +281,12 @@ namespace Circular.Words
                     {
                         Punctuations.Add(new DecorationDot(DecorationDot.Symbols.Diamond, MathHelps.D2Coords(CircleBounds, curAngle + letterArc[i]), (float)(curAngle + letterArc[i]), 10));
                     }
+                    else
+                    {
+                        l = new LetterShapes.Shapes.Blank();
+                        l.Initialize(this, ScriptStyle, curAngle, curAngle + letterArc[i], Word.Syllables[i], big, fancy);
+                        Syllables.Add(l);
+                    }
                 }
                 curAngle += letterArc[i];
 

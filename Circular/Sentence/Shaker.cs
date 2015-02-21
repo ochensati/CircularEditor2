@@ -351,7 +351,7 @@ namespace Circular.Sentence
                         //f = f - Math.Exp(-.4 );
                         if (f > 0)
                         {
-                            f = f * 25;
+                            f = f * 50;
                             //if (iter > .4 * iterations)
                             //    f = f * 16;
                         }

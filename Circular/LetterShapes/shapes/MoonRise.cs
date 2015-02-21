@@ -229,11 +229,14 @@ namespace Circular.LetterShapes.Shapes
 
                     if (_Fancy)
                     {
-                        Rectangle r = FancyLines[FancyLines.Length - 1];
+                        if (FancyLines != null)
+                        {
+                            Rectangle r = FancyLines[FancyLines.Length - 1];
 
-                        arcX = r.X + r.Width / 2;
-                        arcY = r.Y + r.Height / 2;
-                        arcRadius = r.Width / 2;
+                            arcX = r.X + r.Width / 2;
+                            arcY = r.Y + r.Height / 2;
+                            arcRadius = r.Width / 2;
+                        }
                     }
                     else
                         arcRadius = r0;

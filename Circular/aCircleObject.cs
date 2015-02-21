@@ -582,6 +582,9 @@ namespace Circular
         protected List<Shaker.Dot> BorderSyllables;
         public virtual void CalculateBorderWords(string text, int rearrange = 0)
         {
+            if (text == null || text.Trim() == "")
+                return;
+
             string[] words = text.Split(new string[] { ",", " ", ".", ":", ";", "!", "?", "(", ")", "\"", "-" }, StringSplitOptions.RemoveEmptyEntries);
             int letterwidth = 80;
 
