@@ -470,5 +470,10 @@ namespace Circular
             }
         }
         #endregion
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start( Path.GetDirectoryName( Application.ExecutablePath) +  @"\readme.pdf");
+        }
     }
 }

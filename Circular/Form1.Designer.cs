@@ -59,6 +59,8 @@
             this.alignArcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveWordMI = new System.Windows.Forms.ToolStripMenuItem();
             this.saveSentenceMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -99,7 +101,7 @@
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(0, 27);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 40);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -110,7 +112,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1411, 684);
+            this.splitContainer1.Size = new System.Drawing.Size(1411, 671);
             this.splitContainer1.SplitterDistance = 1037;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -120,7 +122,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(370, 684);
+            this.panel1.Size = new System.Drawing.Size(370, 671);
             this.panel1.TabIndex = 11;
             // 
             // propertyGridEx1
@@ -153,7 +155,7 @@
             this.propertyGridEx1.Name = "propertyGridEx1";
             this.propertyGridEx1.SelectedObject = ((object)(resources.GetObject("propertyGridEx1.SelectedObject")));
             this.propertyGridEx1.ShowCustomProperties = true;
-            this.propertyGridEx1.Size = new System.Drawing.Size(361, 678);
+            this.propertyGridEx1.Size = new System.Drawing.Size(361, 665);
             this.propertyGridEx1.TabIndex = 0;
             // 
             // 
@@ -218,8 +220,7 @@
             this.tblText.Name = "tblText";
             this.tblText.Size = new System.Drawing.Size(1089, 72);
             this.tblText.TabIndex = 12;
-            this.tblText.Text = "There’s a horror movie called Alien? That’s really offensive. No wonder everyone " +
-    "keeps invading you.";
+            this.tblText.Text = "";
             // 
             // label1
             // 
@@ -299,7 +300,8 @@
             this.radomizeLinesMI,
             this.alignArcToolStripMenuItem,
             this.saveWordMI,
-            this.saveSentenceMI});
+            this.saveSentenceMI,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1411, 24);
@@ -393,15 +395,33 @@
             this.saveSentenceMI.Visible = false;
             this.saveSentenceMI.Click += new System.EventHandler(this.saveSentenceMI_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(-3, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(232, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Left click to move elements, right click to rotate.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1411, 834);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Circular Editor";
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).EndInit();
@@ -454,6 +474,8 @@
         private System.Windows.Forms.ToolStripMenuItem saveWordMI;
         private System.Windows.Forms.ToolStripMenuItem saveSentenceMI;
         private System.Windows.Forms.ToolStripMenuItem alignArcToolStripMenuItem;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
     }
 }
 
