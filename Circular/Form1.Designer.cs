@@ -34,7 +34,6 @@
             this.pbCanvas = new System.Windows.Forms.PictureBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.propertyGridEx1 = new PropertyGridEx.PropertyGridEx();
             this.rbSherman = new System.Windows.Forms.RadioButton();
             this.rbAshcroft = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -61,6 +60,7 @@
             this.saveSentenceMI = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
+            this.propertyGridEx1 = new PropertyGridEx.PropertyGridEx();
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -124,56 +124,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(370, 671);
             this.panel1.TabIndex = 11;
-            // 
-            // propertyGridEx1
-            // 
-            this.propertyGridEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
-            this.propertyGridEx1.DocCommentDescription.AccessibleName = "";
-            this.propertyGridEx1.DocCommentDescription.AutoEllipsis = true;
-            this.propertyGridEx1.DocCommentDescription.Cursor = System.Windows.Forms.Cursors.Default;
-            this.propertyGridEx1.DocCommentDescription.Location = new System.Drawing.Point(3, 18);
-            this.propertyGridEx1.DocCommentDescription.Name = "";
-            this.propertyGridEx1.DocCommentDescription.Size = new System.Drawing.Size(355, 37);
-            this.propertyGridEx1.DocCommentDescription.TabIndex = 1;
-            this.propertyGridEx1.DocCommentImage = null;
-            // 
-            // 
-            // 
-            this.propertyGridEx1.DocCommentTitle.Cursor = System.Windows.Forms.Cursors.Default;
-            this.propertyGridEx1.DocCommentTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.propertyGridEx1.DocCommentTitle.Location = new System.Drawing.Point(3, 3);
-            this.propertyGridEx1.DocCommentTitle.Name = "";
-            this.propertyGridEx1.DocCommentTitle.Size = new System.Drawing.Size(355, 15);
-            this.propertyGridEx1.DocCommentTitle.TabIndex = 0;
-            this.propertyGridEx1.DocCommentTitle.UseMnemonic = false;
-            this.propertyGridEx1.Location = new System.Drawing.Point(3, 3);
-            this.propertyGridEx1.Name = "propertyGridEx1";
-            this.propertyGridEx1.SelectedObject = ((object)(resources.GetObject("propertyGridEx1.SelectedObject")));
-            this.propertyGridEx1.ShowCustomProperties = true;
-            this.propertyGridEx1.Size = new System.Drawing.Size(361, 665);
-            this.propertyGridEx1.TabIndex = 0;
-            // 
-            // 
-            // 
-            this.propertyGridEx1.ToolStrip.AccessibleName = "ToolBar";
-            this.propertyGridEx1.ToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
-            this.propertyGridEx1.ToolStrip.AllowMerge = false;
-            this.propertyGridEx1.ToolStrip.AutoSize = false;
-            this.propertyGridEx1.ToolStrip.CanOverflow = false;
-            this.propertyGridEx1.ToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.propertyGridEx1.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.propertyGridEx1.ToolStrip.Location = new System.Drawing.Point(0, 1);
-            this.propertyGridEx1.ToolStrip.Name = "";
-            this.propertyGridEx1.ToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 1, 0);
-            this.propertyGridEx1.ToolStrip.Size = new System.Drawing.Size(361, 25);
-            this.propertyGridEx1.ToolStrip.TabIndex = 1;
-            this.propertyGridEx1.ToolStrip.TabStop = true;
-            this.propertyGridEx1.ToolStrip.Text = "PropertyGridToolBar";
             // 
             // rbSherman
             // 
@@ -411,6 +361,51 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Left click to move elements, right click to rotate.";
             // 
+            // propertyGridEx1
+            // 
+            // 
+            // 
+            // 
+            this.propertyGridEx1.DocCommentDescription.AutoEllipsis = true;
+            this.propertyGridEx1.DocCommentDescription.Cursor = System.Windows.Forms.Cursors.Default;
+            this.propertyGridEx1.DocCommentDescription.Location = new System.Drawing.Point(3, 18);
+            this.propertyGridEx1.DocCommentDescription.Name = "";
+            this.propertyGridEx1.DocCommentDescription.Size = new System.Drawing.Size(364, 37);
+            this.propertyGridEx1.DocCommentDescription.TabIndex = 1;
+            this.propertyGridEx1.DocCommentImage = null;
+            // 
+            // 
+            // 
+            this.propertyGridEx1.DocCommentTitle.Cursor = System.Windows.Forms.Cursors.Default;
+            this.propertyGridEx1.DocCommentTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.propertyGridEx1.DocCommentTitle.Location = new System.Drawing.Point(3, 3);
+            this.propertyGridEx1.DocCommentTitle.Name = "";
+            this.propertyGridEx1.DocCommentTitle.Size = new System.Drawing.Size(364, 15);
+            this.propertyGridEx1.DocCommentTitle.TabIndex = 0;
+            this.propertyGridEx1.DocCommentTitle.UseMnemonic = false;
+            this.propertyGridEx1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGridEx1.Location = new System.Drawing.Point(0, 0);
+            this.propertyGridEx1.Name = "propertyGridEx1";
+            this.propertyGridEx1.Size = new System.Drawing.Size(370, 671);
+            this.propertyGridEx1.TabIndex = 0;
+            // 
+            // 
+            // 
+            this.propertyGridEx1.ToolStrip.AccessibleName = "ToolBar";
+            this.propertyGridEx1.ToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
+            this.propertyGridEx1.ToolStrip.AllowMerge = false;
+            this.propertyGridEx1.ToolStrip.AutoSize = false;
+            this.propertyGridEx1.ToolStrip.CanOverflow = false;
+            this.propertyGridEx1.ToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.propertyGridEx1.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.propertyGridEx1.ToolStrip.Location = new System.Drawing.Point(0, 1);
+            this.propertyGridEx1.ToolStrip.Name = "";
+            this.propertyGridEx1.ToolStrip.Padding = new System.Windows.Forms.Padding(2, 0, 1, 0);
+            this.propertyGridEx1.ToolStrip.Size = new System.Drawing.Size(370, 25);
+            this.propertyGridEx1.ToolStrip.TabIndex = 1;
+            this.propertyGridEx1.ToolStrip.TabStop = true;
+            this.propertyGridEx1.ToolStrip.Text = "PropertyGridToolBar";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -448,7 +443,6 @@
         private System.Windows.Forms.Button bDraw;
         private System.Windows.Forms.PictureBox pbCanvas;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private PropertyGridEx.PropertyGridEx propertyGridEx1;
         private System.Windows.Forms.RadioButton rbSherman;
         private System.Windows.Forms.RadioButton rbAshcroft;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -476,6 +470,7 @@
         private System.Windows.Forms.ToolStripMenuItem alignArcToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private PropertyGridEx.PropertyGridEx propertyGridEx1;
     }
 }
 
