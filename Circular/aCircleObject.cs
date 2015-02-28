@@ -183,6 +183,11 @@ namespace Circular
             foreach (var s in SubCircles)
                 s.AllFancy = _AllFancy;
 
+            if (Syllables != null)
+            {
+                foreach (var l in Syllables)
+                    l.Fancy = _AllFancy;
+            }
         }
 
         protected bool _AllBig = false;
@@ -209,6 +214,12 @@ namespace Circular
         {
             foreach (var s in SubCircles)
                 s.AllBig = _AllBig;
+
+            if (Syllables != null)
+            {
+                foreach (var l in Syllables)
+                    l.Big = _AllBig;
+            }
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -293,6 +304,7 @@ namespace Circular
 
         [CategoryAttribute("Syllables")]
         public List<LetterShapes.aSyllable> Syllables { get; set; }
+
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -508,6 +520,158 @@ namespace Circular
         }
 
 
+
+
+        public void CalculateDecorations(bool randomize)
+        {
+
+            if (ScriptStyle == Circular.aCircleObject.ScriptStyles.Small)
+                return;
+
+            if (randomize)
+            {
+                _Sources.Clear();
+                _Anchors.Clear();
+            }
+
+            Bitmap temp = new Bitmap((int)(OuterBounds.Width), (int)(OuterBounds.Width), System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+
+            Graphics g = Graphics.FromImage(temp);
+
+            g.Clear(Color.White);
+            Draw(g, true);
+
+            g.Dispose();
+
+
+            Bitmap temp2 = new Bitmap(100, 100, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+            g = Graphics.FromImage(temp2);
+            g.DrawImage(temp, new Rectangle(0, 0, temp2.Width, temp2.Height));
+            g.Dispose();
+
+
+            // temp2.Save(@"c:\temp\b1.bmp");
+            double convertToSearch = temp2.Width / (double)OuterBounds.Width;
+            double offsetX = -1 * OuterBounds.X;
+            double offsetY = -1 * OuterBounds.Y;
+
+            BaseGrid searchGrid = BitmapToSearchGrid(temp2);
+
+            GridPos startPos = new GridPos(1, 1);
+            GridPos endPos = new GridPos(2, 2);
+            // JumpPointParam jpParam = new JumpPointParam(searchGrid, startPos, endPos);
+            JumpPointParam jpParam = new JumpPointParam(searchGrid, true, true, true, HeuristicMode.MANHATTAN);
+            jpParam.Reset(startPos, endPos);
+            List<GridPos> resultPathList = JumpPointFinder.FindPath(jpParam);
+
+            AddAnchor("Word_Center", new DecorationAnchor(new Point[] { new Point((int)0, (int)0) }, .01, 1, this));
+
+            int ccA = 0;
+            foreach (var l in Syllables)
+            {
+                foreach (var kvp in l.Anchors)
+                {
+                    string key = ccA + " " + kvp.Key;
+                    if (kvp.Value.Owner != null)
+                        key = ccA + " " + kvp.Value.Owner.ToString() + "/" + kvp.Key;
+                    AddAnchor(key, kvp.Value);
+
+                }
+
+                foreach (var kvp in l.Sources)
+                {
+                    string key = ccA + " " + kvp.Key;
+                    if (kvp.Value.Owner != null)
+                        key = ccA + " " + kvp.Value.Owner.ToString() + "/" + kvp.Key;
+                    AddSource(key, kvp.Value);
+
+                }
+                ccA++;
+            }
+
+            int ccBad = 0;
+            foreach (var a in _Anchors)
+            {
+                startPos = new GridPos((int)((a.Value.ControlPoints[0].X + offsetX) * convertToSearch), (int)((a.Value.ControlPoints[0].Y + offsetY) * convertToSearch));
+                if (searchGrid.IsWalkableAt(startPos) == false)
+                {
+                    a.Value.Goodness = 0;
+                    ccBad++;
+                }
+            }
+
+
+
+            double probTick = Math.Pow(_Sources.Count / 20d, 5) * .98;
+            if (probTick > .98)
+                probTick = .98;
+
+
+            if ((_Anchors.Count - ccBad) < _Sources.Count)
+            {
+                foreach (var l in Syllables)
+                {
+                    foreach (var kvp in l.Sources)
+                    {
+                        if (rnd.NextDouble() > .6)
+                        {
+                            AddAnchor(kvp.Value.Name, kvp.Value);
+                            ccA++;
+                        }
+                    }
+                }
+            }
+
+
+            List<Point> controlPoints;
+            //  _CurrentDecorations.Clear();
+            VectorGraphics.Line.LineTypes defaultLineType = VectorGraphics.Line.LineTypes.Cubic;
+            if (ScriptStyle != Circular.aCircleObject.ScriptStyles.Ashcroft)
+                defaultLineType = VectorGraphics.Line.LineTypes.Line;
+
+
+            if (randomize)
+            {
+                _CurrentDecorations = new List<DecorationLine>();
+                foreach (var source in _Sources)
+                {
+
+                    if (rnd.NextDouble() > probTick && ShowDecorations == true)
+                    {
+                        int ccTries = 0;
+                        var d = new DecorationLine(this, defaultLineType, source.Value.Name, Color.Black);
+                        d.SetControlPoints(convertToSearch, jpParam, offsetX, offsetY);
+                        _CurrentDecorations.Add(d);
+                    }
+                    else
+                    {
+                        controlPoints = new List<Point>();
+
+                        controlPoints.AddRange(source.Value.ControlPoints);
+
+                        if (controlPoints.Count < 2)
+                            controlPoints.Add(new Point((int)0, (int)0));
+
+
+                        var d = new DecorationLine(this, defaultLineType, source.Value.Name, Color.Black);
+                        d.SetControlPoints(controlPoints);
+                        _CurrentDecorations.Add(d);
+                    }
+                }
+            }
+            else
+            {
+                if (_CurrentDecorations != null)
+                {
+                    foreach (var dec in _CurrentDecorations)
+                    {
+                        dec.SetControlPoints(convertToSearch, jpParam, offsetX, offsetY);
+                    }
+                }
+            }
+
+        }
+
         protected abstract void DrawCircle(Graphics canvas, bool mockup);
 
 
@@ -718,6 +882,8 @@ namespace Circular
 
                 CalculateBorderWords(text, rearrange - 1);
             }
+
+            CalculateDecorations(true);
             DoRedraw();
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////

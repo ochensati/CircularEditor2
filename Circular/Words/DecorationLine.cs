@@ -103,7 +103,7 @@ namespace Circular.Words
         }
 
 
-        private WordCircle _Word;
+        private aCircleObject _Word;
 
         private string _SourceName;
         private string _anchorName;
@@ -145,7 +145,7 @@ namespace Circular.Words
         VectorGraphics.Line TheDecoration2;
 
         public DecorationLine() { }
-        public DecorationLine(WordCircle word, VectorGraphics.Line.LineTypes lineType, string SourceName, Color foregroundColor)
+        public DecorationLine(aCircleObject word, VectorGraphics.Line.LineTypes lineType, string SourceName, Color foregroundColor)
         {
 
             _Word = word;
@@ -158,7 +158,7 @@ namespace Circular.Words
             this._LineType = lineType;
         }
 
-        public DecorationLine(WordCircle word, VectorGraphics.Line.LineTypes lineType, string SourceName, string AnchorName, Color foregroundColor)
+        public DecorationLine(aCircleObject word, VectorGraphics.Line.LineTypes lineType, string SourceName, string AnchorName, Color foregroundColor)
         {
 
             this._LineColor = foregroundColor;
@@ -169,7 +169,7 @@ namespace Circular.Words
             this._LineType = lineType;
         }
 
-        public DecorationLine(WordCircle word, VectorGraphics.Line.LineTypes lineType, Point[] controlPoints, string SourceName, string AnchorName, Color foregroundColor)
+        public DecorationLine(aCircleObject word, VectorGraphics.Line.LineTypes lineType, Point[] controlPoints, string SourceName, string AnchorName, Color foregroundColor)
         {
 
             this._LineColor = foregroundColor;
